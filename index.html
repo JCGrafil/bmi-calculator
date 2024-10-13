@@ -6,23 +6,59 @@
     <title>BMI Calculator</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            text-align: center;
-            padding: 50px;
+            font-family: 'Arial', sans-serif;
+            background-color: #e9ecef;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #343a40;
         }
         .container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            margin: 0 auto;
-        }
-        input, button {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
             width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #007bff;
+        }
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: bold;
+        }
+        input {
+            width: calc(100% - 20px);
             padding: 10px;
-            margin: 10px 0;
+            margin-bottom: 15px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -30,10 +66,10 @@
     <div class="container">
         <h1>BMI Calculator</h1>
         <label for="weight">Weight (kg):</label>
-        <input type="number" id="weight" placeholder="Enter your weight">
+        <input type="number" id="weight" placeholder="Enter your weight" required>
         
         <label for="height">Height (cm):</label>
-        <input type="number" id="height" placeholder="Enter your height">
+        <input type="number" id="height" placeholder="Enter your height" required>
 
         <button onclick="calculateBMI()">Calculate BMI</button>
 
@@ -45,8 +81,8 @@
             const weight = parseFloat(document.getElementById('weight').value);
             const height = parseFloat(document.getElementById('height').value) / 100; // convert cm to meters
             
-            if (isNaN(weight) || isNaN(height)) {
-                document.getElementById('result').textContent = "Please enter valid numbers.";
+            if (isNaN(weight) || isNaN(height) || height <= 0 || weight <= 0) {
+                document.getElementById('result').textContent = "Please enter valid positive numbers.";
                 return;
             }
 
